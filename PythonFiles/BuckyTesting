@@ -1,0 +1,8 @@
+"""class Climber:
+	def __init__(self, name, grade):
+		self.name = name
+		self.grade = grade
+		
+paul = Climber("Paul", "5.10")
+print(paul.grade)"""
+

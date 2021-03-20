@@ -1,0 +1,44 @@
+from tkinter import *
+from tkinter import ttk
+import time
+
+
+class Start():
+	#master = root = Tk()
+	#self = Start
+	def __init__(self, master):
+		master.title("Climbing Time Trainer-CTT")
+		master.resizable(width=TRUE, height=TRUE)
+		#master.state("zoomed")
+		master.geometry("1500x1000+200+50")
+		self.frame = Frame(root, height=1000, width=1000)
+		self.frame.pack()
+		self.list = ["paul", "eric", "sepehr"]
+		
+		lcount = 0
+		count = 10
+		for item in self.list:
+			print(item)
+			self.list[int(lcount)] = Button(text=item, fg="green", bg="lightblue", font=("Arial",12))
+			self.list[int(lcount)].place(x=420, y=int(count), width=120, height=40)
+			self.list[int(lcount)].bind("<ButtonRelease-1>", self.test)
+			count += 40
+			lcount +=1
+			
+	def test(self, event):
+		print("move buttons")
+		self.list[0].place(x=40, y=40, width=120, height=40)
+		self.list[1].place(x=60, y=80, width=120, height=40)
+		self.list[2].place(x=80, y=120, width=120, height=40)
+		self.frame.update()
+	
+	
+	
+	
+	
+	
+	
+if __name__ == "__main__":
+	root = Tk()
+	Start(root)
+	root.mainloop()

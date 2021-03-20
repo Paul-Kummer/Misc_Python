@@ -1,0 +1,161 @@
+from tkinter import *
+from tkinter import ttk
+import time
+
+
+class Start():
+	#master = root = Tk()
+	#self = Start
+	def __init__(self, master):
+		master.title("Climbing Time Trainer-CTT")
+		master.resizable(width=TRUE, height=TRUE)
+		master.state("zoomed")
+		master.geometry("1500x1000+200+50")
+		
+		#Sittups
+		self.sittups = Label(master, text="Sittups", fg="green", font=("Times",15))
+		self.sittups.place(x=50, y=50, width=200, height=25)
+		self.sittupsEntry = Entry(master, font=("Times",15))
+		self.sittupsEntry.place(x=200, y=50, width=200, height=25)
+		#PROGRESSBAR-Sittups
+		self.sittupProgress = ttk.Progressbar(master, orient="horizontal", length=500, mode="determinate")
+		self.sittupProgress.place(x=100, y=100, width=550, height=50)
+		self.sittupProgress["maximum"] = 1
+		self.sittupProgress["value"] = 1
+		
+		#Leglifts
+		self.legLifts = Label(master, text="Leg-Lifts", fg="green", font=("Times",15))
+		self.legLifts.place(x=50, y=200, width=200, height=25)
+		self.legLiftsEntry = Entry(master, font=("Times",15))
+		self.legLiftsEntry.place(x=200, y=200, width=200, height=25)
+		#PROGRESSBAR-Leglifts
+		self.legLiftProgress = ttk.Progressbar(master, orient="horizontal", length=500, mode="determinate")
+		self.legLiftProgress.place(x=100, y=250, width=550, height=50)
+		self.legLiftProgress["maximum"] = 1
+		self.legLiftProgress["value"] = 1
+		
+		#Pullups
+		self.pullups = Label(master, text="Pullups", fg="green", font=("Times",15))
+		self.pullups.place(x=50, y=350, width=200, height=25)
+		self.pullupsEntry = Entry(master, font=("Times",15))
+		self.pullupsEntry.place(x=200, y=350, width=200, height=25)
+		#PROGRESSBAR-Pullups
+		self.PullupProgress = ttk.Progressbar(master, orient="horizontal", length=500, mode="determinate")
+		self.PullupProgress.place(x=100, y=400, width=550, height=50)
+		self.PullupProgress["maximum"] = 1
+		self.PullupProgress["value"] = 1
+		
+		#Start Button
+		self.begin = Button(text="Start Workout", fg="green", bg="lightblue", font=("Arial",16))
+		self.begin.place(x=100, y=890, width=150, height=60)
+		self.begin.bind("<ButtonRelease-1>", self.start)
+		
+		#Stop Button
+		self.stop = Button(text="Pause" , fg="#ef4c5f", bg="lightblue", font=("Arial",16))
+		self.stop.place(x=250, y=890, width=120, height=30)
+		self.stop.bind("<ButtonRelease-1>", self.stopping)
+		
+		#Resume Button
+		self.resume = Button(text="Resume", fg="#3e99e0", bg="lightblue", font=("Arial",16))
+		self.resume.place(x=250, y=920, width=120, height=30) #895
+		self.resume.bind("<ButtonRelease-1>", self.resuming)
+	
+	#PROGRESSBAR-ispaused?
+	def isPaused (self):
+		paused = False
+		
+	#PROGRESSBAR Stop
+	def stopping (self,master):
+		Start.isPaused.paused = True
+		print("stop button",Start.pause)
+		#pass
+	
+	#PROGRESSBAR Resume
+	def resuming (self,master):
+		Start.isPaused.paused = False
+		print("resume button", Start.pause)
+		#pass
+		
+	#PROGRESSBAR Start	
+	def start (self,master):
+		Start.isPaused.paused = False
+		
+		try:
+			self.sittupSeconds = int(self.sittupsEntry.get())
+		except:
+			self.sittupSeconds = 0
+		try:
+			self.legLiftSeconds = int(self.legLiftsEntry.get())
+		except:
+			self.legLiftSeconds = 0
+		try:
+			self.pullupSeconds = int(self.pullupsEntry.get())
+		except:
+			self.pullupSeconds = 0
+		
+		self.sittupProgress["value"] = self.sittupSeconds
+		self.sittupProgress["maximum"] = self.sittupSeconds
+		
+		self.legLiftProgress["value"] = self.legLiftSeconds
+		self.legLiftProgress["maximum"] = self.legLiftSeconds
+		
+		self.PullupProgress["value"] = self.pullupSeconds
+		self.PullupProgress["maximum"] = self.pullupSeconds
+		
+		self.countDown()
+		
+	#PROGRESSBAR Start Counting Down
+	def countDown (self):
+		root.update()
+		self.sittupProgress["value"] = self.sittupSeconds
+		self.legLiftProgress["value"] = self.legLiftSeconds
+		self.PullupProgress["value"] = self.pullupSeconds
+		
+		sleepTimeTenths = 0
+		amIPaused = Start.isPaused.paused
+		print("am i paused: ", amIPaused)
+		
+		if amIPaused == False:
+			if self.sittupSeconds > 0:
+				self.sittupSeconds -= 1
+				self.sittupProgress["value"] = self.sittupSeconds
+				#time.sleep(1)
+				self.sittupProgress.after(1050, self.countDown)
+				
+				
+			elif self.legLiftSeconds > 0:
+				self.legLiftSeconds -= 1
+				self.legLiftProgress["value"] = self.legLiftSeconds
+				#time.sleep(1)
+				self.legLiftProgress.after(1050, self.countDown)
+				
+
+			elif self.pullupSeconds > 0:
+				self.pullupSeconds -= 1
+				self.PullupProgress["value"] = self.pullupSeconds
+				#time.sleep(1)
+				self.PullupProgress.after(1050, self.countDown)
+				
+			else:
+				time.sleep(.5)
+				self.sittupProgress["maximum"] = 1
+				self.sittupProgress["value"] = 1
+				self.legLiftProgress["maximum"] = 1
+				self.legLiftProgress["value"] = 1
+				self.PullupProgress["maximum"] = 1
+				self.PullupProgress["value"] = 1
+
+		elif amIPaused == True:
+			time.sleep(.1)
+			sleepTimeTenths += .1
+			print("Paused: ",(int(sleepTimeTenths)), "Seconds")
+			self.countDown()
+			
+		else:
+			pass
+		
+		
+if __name__ == "__main__":
+	root = Tk()
+	Start(root)
+	root.mainloop()

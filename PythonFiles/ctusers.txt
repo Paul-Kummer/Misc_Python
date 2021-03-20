@@ -1,0 +1,6 @@
+#User : CurrentXP : HighestXP : HardestBoulder : HardestClimb : ClimbingGroug : Notes : Award.Award.Award : Chist!Chist!Chist
+Paul : 54 : 20 : V14 : 5.13 : FLBG : None : vm.sttr.staff.ic.xxlc.xlc.xxxlc.lc.mc.sc.gt.bt.mt.st : 5.10!5.11!V9!5.15d!B4!V14!B3!B5!V17!5.15c
+Eric : 1234567 : 12345678 : B3 : 5.5 : NDSU : Rock Feeler : staff : B1!Vb!5.10!5.10c
+Adela : 123456789 : 12 : V99 : 9.35 : FLBG : None : None : 5.9d!V99!5.17c
+Chris : 200 : 500 : V8 : 5.13 : FLBG : None : None : 5.13!5.10!5.9!V4
+Sepehr : 100 : 100 : V3 : 5.10 : FLBG : None : None : 5.8!5.5!5.8!5.9
